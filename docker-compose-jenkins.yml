@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  ##############################################################
+  ##
+  ## Jenkins Service
+  ##
+  ##############################################################
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    environment:
+      - "TZ=UTC"
+    ports:
+      - "9090:8080"
+      - "50000:50000"
+    volumes:
+      - /home/cesar.sturion/docker-volumes/jenkins_home:/var/jenkins_home:rw
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "3"
+

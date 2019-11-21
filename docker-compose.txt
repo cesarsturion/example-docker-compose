@@ -1,0 +1,43 @@
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+Quando precisamos baixar uma imagem, na maioria das vezes vamos ao dockerhub com as informações da imagem passamos a usa-la:
+
+	docker run --name database -e MYSQL_ROOT_PASSWORD=teste123 -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress -d mysql:5.7
+	
+	docker run --name blog-cafe --link database:mysql -e WORDPRESS_DB_HOST=database:3306 -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress -p 8000:80 -d wordpress
+
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+A estrutura base de um docker-compose é essa: (docker-compose-base.yml)
+
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+Transformando os comandos em um docker-compose: (docker-compose-ex01.yml)
+
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+Usando o restart e incluindo volumes: (docker-compose-ex02.yml)
+
+unless-stopped - é o mesmo que o always, sendo que diferença é que se o container for parado manualmente ou por um restart do serviço docker o mesmo não será inicializado.
+
+Porque usar volumes? No nosso caso para não termos que a todo o momento ficar instalando o wordpress. Em outros casos para manter dados ou informações para realizar debug ou realizar validações.
+
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+Inclua um controle melhor dos logs dos containers: (docker-compose-ex03.yml)
+
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+---->>------------------------------------------------------------
+
+

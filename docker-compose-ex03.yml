@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+   database:
+      container_name: database-blog
+      image: mysql:5.7
+      environment:
+         MYSQL_ROOT_PASSWORD: teste123
+         MYSQL_DATABASE: wordpress
+         MYSQL_USER: wordpress
+         MYSQL_PASSWORD: wordpress
+      restart: always #[no | always | on-failure | unless-stopped]   
+      volumes:
+         - db_data:/var/lib/mysql #(volume nomeado)
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "200k"
+          max-file: "10"
+
+   wordpress:
+      container_name: blog-cafe
+      depends_on:
+         - database
+      image: wordpress:latest
+      ports:
+         - "8000:80"
+      links: 
+         - database:mysql
+      environment:
+         WORDPRESS_DB_HOST: database:3306
+         WORDPRESS_DB_USER: wordpress
+         WORDPRESS_DB_PASSWORD: wordpress
+         WORDPRESS_DB_NAME: wordpress
+      restart: always    
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "200k"
+          max-file: "10"
+
+volumes:
+    db_data: {}
