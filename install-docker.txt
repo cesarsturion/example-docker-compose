@@ -1,0 +1,11 @@
+Este exemplo usa o script em get.docker.com para instalar a versão mais recente do Docker Engine - Community no Linux. 
+Para instalar a versão de teste mais recente, use test.docker.com. Em cada um dos comandos abaixo, substitua cada ocorrência de get com teste.
+
+$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh
+
+$ sudo usermod -aG docker $USER
+
+
+
+
